@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitors Book</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background-color: whitesmoke;
+            position: relative; 
+            
+        }
+        .navbar {
+            background-image: linear-gradient(blue,lightblue);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            height: 200px;
+        }
+        .navbar .logo {
+            color: aliceblue;
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute; 
+            top: 150px; 
+            left: 15px; 
+        }
+        .navbar .andra {
+            color: aliceblue;
+            font-size: 35px;
+            font-weight: bold;
+            position: absolute;
+            top: 200px;
+            left: 620px;
+        }
+        .navbar img {
+            width: 200px; 
+            height: 200px; 
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            margin-right: 20px;
+        }
+        .navbar ul {
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center; 
+            flex: 1;
+        }
+        .navbar ul li {
+            list-style: none;
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+            font-weight: 600;
+            padding: 10px 15px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .navbar ul li a:hover {
+            background: white;
+            color: black;
+            border-radius: 4px;
+        }
+        .container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 20px;
+            border: 2px solid rgb(245, 245, 241);
+            border-radius: 8px;
+            background-color: white; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+        label, button, select {
+            margin-bottom: 10px; 
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid lightblue; 
+            border-radius: 4px;
+            background-color: white;
+            outline: none; 
+        }
+        select:focus {
+            border-color: #007bff; 
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); 
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 20px; 
+            justify-content: center; 
+            margin: 60px auto 0; 
+            max-width: 1200px; 
+            background-color: white;
+        }
+        .gallery div {
+            text-align: center;
+            overflow: hidden; 
+            transition: transform 0.3s; 
+        }
+        .gallery img {
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            transition: transform 0.3s;
+        }
+        .gallery div:hover img {
+            transform: scale(1.1); 
+        }
+        .gallery h3 {
+            margin: 10px 0 0; 
+        }
+        @media (max-width: 425px) {
+    .navbar {
+        padding: 9px;
+    }
+    .navbar .logo {
+        font-size: 10px;
+        margin: 4px 0;
+        top: 60px;
+    }
+    .navbar .andra {
+        font-size: 18px;
+        top: 200px; 
+        left: 120px; 
+        white-space: nowrap;
+    }
+    .navbar ul {
+        padding: 0;
+        margin: 0;
+        top: 180px;
+    }
+    .navbar ul li {
+        margin: 2px 0;
+        top: 180px;
+    }
+    .navbar ul li a {
+        font-weight: 280;
+        padding: 4px 7px;
+        font-size: 15px;
+        top: 180px;
+    }
+    .navbar ul li a:hover {
+        border-radius: 2px;
+    }
+    .container {
+        top: 20px;
+        right: 20px;
+        padding: 8px;
+        border: 1px solid rgb(245, 245, 241);
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    label, button, select {
+        margin-bottom: 4px;
+        font-size: 8px;
+    }
+    button {
+        padding: 2px 4px;
+        font-size: 10px;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+    select {
+        padding: 4px;
+        font-size: 7px;
+        border: 1px solid lightblue;
+        border-radius: 1px;
+    }
+    select:focus {
+        box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.25);
+    }
+    .navbar img {
+        width: 80px; 
+        height: auto;
+    }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .gallery img {
+        width: 90%;
+        height: 90px;
+        object-fit: cover;
+    }
+    .gallery h3 {
+        font-size: 12px; 
+    }
+   
+}
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="logo.png" alt="logos">
+        <div class="logo">Visitors Book</div>
+        <div class="andra">Explore Andra Pradesh</div>
+        <ul>
+            <li><a href="./about.html"><i class='bx bxs-home'></i>Home</a></i></li>
+            <li><a href="./index.html"><i class='bx bxs-cart'></i>About</a></li>
+            <li><a href="https://www.google.co.in/"><i class='bx bxs-help-circle' ></i>Help</a></li>
+            <li><a href="./about.html"><i class='bx bxs-contact' ></i>ANDRA PRADESH</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <label for="district">Choose district:</label>
+        <select id="district" name="district">
+            <option value="">---select---</option>
+            <option value="alluri-sitharama-raju">Alluri Sitharama Raju</option>
+            <option value="anakapalli">Anakapalli</option>
+            <option value="ananthapuram">Ananthapuram</option>
+            <option value="annamayya">Annamayya</option>
+            <option value="chittoor">Chittoor</option>
+            <option value="dr-br-ambedkar-konaseema">Dr. B.R. Ambedkar Konaseema</option>
+            <option value="east-godavari">East Godavari</option>
+            <option value="eluru">Eluru</option>
+            <option value="guntur">Guntur</option>
+            <option value="Kakinada">Kakinada</option>
+            <option value="krishna">Krishna</option>
+            <option value="kurnool">Kurnool</option>
+            <option value="nandyal">Nandyal</option>
+            <option value="ntr">NTR</option>
+            <option value="palnadu">Palnadu</option>
+            <option value="parvathipuram-manyam">Parvathipuram Manyam</option>
+            <option value="prakasam">Prakasam</option>
+            <option value="nellore">Nellore</option>
+            <option value="sathya-sai">Sri Sathya Sai</option>
+            <option value="srikakulam">Srikakulam</option>
+            <option value="tirupati">Tirupati</option>
+            <option value="visakhapatnam">Visakhapatnam</option>
+            <option value="vizianagaram">Vizianagaram</option>
+            <option value="west-godavari">West Godavari</option>
+            <option value="ysr">Y.S.R</option>
+        </select>
+        <button onclick="handleSubmit()">Submit</button>
+    </div>
+
+    <div class="gallery">
+        <div>
+            <a href="./alluri.html">
+                <img src="https://drishtiias.com/images/uploads/1688562234_image12.png" alt="alluri-sitharama-raju">
+            </a>
+            <h3>alluri-sitharama-raju</h3>
+        </div>
+        <div>
+            <a href="./anakapalli.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Anakapalle_Montage.png" alt="anakapalli">
+            </a>
+            <h3>anakapalli</h3>
+        </div>
+        <div>
+            <a href="./anantha.html">
+                <img src="https://qph.cf2.quoracdn.net/main-qimg-9d3dab264f4f438ba817c5658f72b4f4-lq" alt="ananthapuram">
+            </a>
+            <h3>ananthapuram</h3>
+        </div>
+        <div>
+            <a href="./annamayya.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/The_Temple_of_Sri_Soumyanatha_Swamy_Nandalur_Kadapa_AP_INDIA.jpg/220px-The_Temple_of_Sri_Soumyanatha_Swamy_Nandalur_Kadapa_AP_INDIA.jpg" alt="annamayya">
+            </a>
+            <h3>annamayya</h3>
+        </div>
+        <div>
+            <a href="./chittoru.html">
+                <img src="https://www.indiatourismguide.in/wp-content/uploads/2017/09/Kanipakam-Temple.png" alt="chittoor">
+            </a>
+            <h3>chittoor</h3>
+        </div>
+        <div>
+            <a href="./ambedkar.html">
+                <img src="https://i.ytimg.com/vi/gYuMa27cvwE/hqdefault.jpg" alt="dr-br-ambedkar-konaseema">
+            </a>
+            <h3>dr br Ambedkar</h3>
+        </div>
+        <div>
+            <a href="./east%20godavari.html">
+                <img src="https://as2.ftcdn.net/v2/jpg/02/50/70/95/1000_F_250709544_jyhizrq4N5Ie6Nst2dzTdeMxFHHTI4xs.jpg" alt="east-godavari">
+            </a>
+            <h3>east-godavari</h3>
+        </div>
+        <div>
+            <a href="./eluru.html">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9ai9e8wV1OGEwS3NwsfsVCstrj3O1fcM4mA&s" alt="eluru">
+            </a>
+            <h3>eluru</h3>
+        </div>
+        <div>
+            <a href="./guntur%202.html">
+                <img src="https://www.trawell.in/admin/images/upload/719249815Dhyana_Buddha.jpg" alt="guntur">
+            </a>
+            <h3>guntur</h3>
+        </div>
+        <div>
+            <a href="./kakinada.html">
+                <img src="https://content.jdmagicbox.com/comp/kakinada/c6/9999px884.x884.190827031035.b2c6/catalogue/kakinada-beach-bridge-kakinada-9m4jof9atf.jpg?clr=" alt="kakinada">
+            </a>
+            <h3>kakinada</h3>
+        </div>
+        <div>
+            <a href="./krishna2.html">
+                <img src="https://assets.thehansindia.com/hansindia-bucket/Places_9840.jpg" alt="krishna">
+            </a>
+            <h3>krishna</h3>
+        </div>
+        <div>
+            <a href="./kurnool2.html">
+                <img src="https://images.nativeplanet.com/img/2017/03/cover-25-1490423759.jpg" alt="kurnool">
+            </a>
+            <h3>kurnool</h3>
+        </div>
+        <div>
+            <a href="./nandyala2.html">
+                <img src="https://facts.net/wp-content/uploads/2023/07/30-facts-about-nandyal-1689301101.jpg" alt="nandyal">
+            </a>
+            <h3>nandyal</h3>
+        </div>
+        <div>
+            <a href="./ntr2.html">
+                <img src="https://content3.jdmagicbox.com/comp/srikakulam/u6/9999p8942.8942.191120224739.t9u6/catalogue/ntr-adventure-park-srikakulam-parks-nssiqowzo3.jpg" alt="ntr">
+            </a>
+            <h3>ntr</h3>
+        </div>
+        <div>
+            <a href="./palnadu2.html">
+                <img src="https://media-cdn.tripadvisor.com/media/photo-s/11/5a/c3/dc/photo4jpg.jpg" alt="palnadu">
+            </a>
+            <h3>palnadu</h3>
+        </div>
+        <div>
+            <a href="./parvathipuram2.html">
+                <img src="https://newsmeter.in/h-upload/2022/07/09/323964-pumped-hydro-storage-1-1.webp" alt="parvathipuram-manyam">
+            </a>
+            <h3>parvathipuram-manyam</h3>
+        </div>
+        <div>
+            <a href="./prakasam2.html">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/b5/db/4f/prakasam-barrage.jpg?w=1200&h=-1&s=1" alt="prakasam">
+            </a>
+            <h3>prakasam</h3>
+        </div>
+        <div>
+            <a href="./nellore2.html">
+                <img src="https://www.theindiatourism.com/images/Visakhapatnam.jpg" alt="nellore">
+            </a>
+            <h3>nellore</h3>
+        </div>
+        <div>
+            <a href="./sri%20satya%20sai.html">
+                <img src="https://nottejasblog.wordpress.com/wp-content/uploads/2017/12/1.jpg?w=1100" alt="sri-sathya-sai">
+            </a>
+            <h3>sri-sathya-sai</h3>
+        </div>
+        <div>
+            <a href="./srikakulam2.html">
+                <img src="https://jaihosrikakulam.wordpress.com/wp-content/uploads/2018/06/srikaku.jpg?w=1024&h=768&crop=1" alt="srikakulam">
+            </a>
+            <h3>srikakulam</h3>
+        </div>
+        <div>
+            <a href="./tirupati2.html">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD31wkB8tbzWM_xCizjF6j38qquYQgB1ikdVjYHQwjm7kds8W_mvfdDlnve1HygYhWUkY&usqp=CAU" alt="tirupati">
+            </a>
+            <h3>tirupati</h3>
+        </div>
+        <div>
+            <a href="./vizag2.html">
+                <img src="https://assets.thehansindia.com/h-upload/feeds/2019/05/10/173219-vizag.jpg" alt="visakhapatnam">
+            </a>
+            <h3>vizag</h3>
+        </div>
+        <div>
+            <a href="./vizayanagaram2.html">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/40/bd/64/ramayanam-temple.jpg?w=500&h=-1&s=1" alt="vizianagaram">
+            </a>
+            <h3>vizianagaram</h3>
+        </div>
+        <div>
+            <a href="./west%20god2.html">
+                <img src="https://alchetron.com/cdn/east-godavari-district-280141a2-45e5-4dfb-bc7d-163ee1af251-resize-750.gif" alt="west-godavari">
+            </a>
+            <h3>west-godavari</h3>
+        </div>
+        <div>
+            <a href="./kadapa2.html">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/4a/20/f2/grand-canyon-of-india.jpg?w=500&h=500&s=1" alt="ysr">
+            </a>
+            <h3>kadapa</h3>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit() {
+            var selectedValue = document.getElementById('district').value;
+            var urls = { 
+                'alluri-sitharama-raju': '/alluri.html',
+                'anakapalli': './anakapalli.html',
+                'ananthapuram': './anantha.html',
+                'annamayya': './annamayya.html',
+                'chittoor': './chittoru.html',
+                'dr-br-ambedkar-konaseema': './ambedkar.html',
+                'east-godavari': './east%20godavari.html',
+                'eluru': './eluru.html',
+                'guntur': './guntur%202.html',
+                'kakinada': './kakinada.html',
+                'krishna': './krishna2.html',
+                'kurnool': './kurnool2.html',
+                'nandyal': './nandyala2.html',
+                'ntr': './ntr2.html',
+                'palnadu': './palnadu2.html',
+                'parvathipuram-manyam': './parvathipuram2.html',
+                'prakasam': './prakasam2.html',
+                'nellore': './nellore2.html',
+                'sri-sathya-sai': './sri%20satya%20sai.html',
+                'srikakulam': './srikakulam2.html',
+                'tirupati': './tirupati2.html',
+                'visakhapatnam': './vizag2.html',
+                'vizianagaram': './vizayanagaram2.html',
+                'west-godavari': './west%20god2.html',
+                'ysr': './kadapa2.html'
+            };
+            if (urls[selectedValue]) {
+                window.location.href = urls[selectedValue];
+            } else {
+                alert('Please select a valid district.');
+            }
+        }
+    </script>
+</body>
+</html>
